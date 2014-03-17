@@ -753,7 +753,7 @@ class SqlStore(object):
             self.modified_tables.clear()
             self.executed_queries.clear()
             if first_error:
-                raise first_error
+                raise first_error # pylint: disable=E0702
 
     def rollback(self):
         self.transaction_end()
@@ -779,7 +779,7 @@ class SqlStore(object):
             self.modified_tables.clear()
             self.executed_queries.clear()
             if first_error:
-                raise first_error
+                raise first_error # pylint: disable=E0702
 
     def rollback_all(self, force=False):
         try:
@@ -909,7 +909,7 @@ class LuzCursor():
         self.client_info = 'unknown'
         sql = 'select host from information_schema.processlist where id=%s'
         try:
-            self.cursor.execute(sql, self.cursor.connection.thread_id())
+            self.cursor.execute(sql, (self.cursor.connection.thread_id(),))
             rs = self.cursor.fetchone()
             if rs:
                 self.client_info = rs[0]
@@ -941,6 +941,14 @@ class LuzCursor():
         sql = sql.strip(self.garbage_chars)
         cmd = sql.split(' ', 1)[0].lower()
         host = self.farm.dbcnf['host']
+
+        # MySQL-python 1.2.5 force args to be dict/tuple/list, so convert
+        # args to tuple if it's not as expected
+
+        if args is not None and not isinstance(args, (list, tuple, dict)):
+                warn('args for SQL should be tuple or dict')
+                args = (args,)
+
         try:
             key = 'sqlstore.{host}.{cmd}'.format(host=host, cmd=cmd)
             return self._execute(cmd, sql, args, **kwargs)

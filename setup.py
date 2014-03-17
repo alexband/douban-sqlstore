@@ -22,7 +22,7 @@ ENTRY_POINTS = """
 """
 
 # dependencies
-INSTALL_REQUIRES = ['']
+INSTALL_REQUIRES = ['MySQL-python==1.2.5']
 TESTS_REQUIRE = ['mock', 'nose']
 TEST_SUITE = 'nose.collector'
 
@@ -35,7 +35,6 @@ def read_long_description(filename):
         return open(path).read()
     return ""
 
-install_requires = []
 
 setup(
     name=NAME,
@@ -53,7 +52,7 @@ setup(
     install_package_data=True,
     zip_safe=False,
     entry_points=ENTRY_POINTS,
-    install_requires=install_requires,
+    install_requires=INSTALL_REQUIRES,
     tests_require=TESTS_REQUIRE,
     test_suite=TEST_SUITE,
 )
