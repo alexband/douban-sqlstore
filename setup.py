@@ -22,7 +22,7 @@ ENTRY_POINTS = """
 """
 
 # dependencies
-INSTALL_REQUIRES = ['MySQL-python==1.2.4']
+INSTALL_REQUIRES = ['MySQL-python==1.2.5']
 TESTS_REQUIRE = ['mock', 'nose']
 TEST_SUITE = 'nose.collector'
 
