@@ -35,13 +35,8 @@ def read_long_description(filename):
         return open(path).read()
     return ""
 
-install_requires = [
-    'MySQL-python',
-]
+install_requires = []
 
-dependency_links = [
-    'git+http://github.com/qingfeng/MySQLdb1.git@b203124b73b0018fe2da399aa363ce031392c3d4#egg=MySQL-python',
-    ]
 setup(
     name=NAME,
     version=VERSION,
