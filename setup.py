@@ -22,7 +22,7 @@ ENTRY_POINTS = """
 """
 
 # dependencies
-INSTALL_REQUIRES = ['MySQL-python==1.2.5']
+INSTALL_REQUIRES = ['']
 TESTS_REQUIRE = ['mock', 'nose']
 TEST_SUITE = 'nose.collector'
 
@@ -35,6 +35,13 @@ def read_long_description(filename):
         return open(path).read()
     return ""
 
+install_requires = [
+    'MySQL-python',
+]
+
+dependency_links = [
+    'git+http://github.com/qingfeng/MySQLdb1.git@b203124b73b0018fe2da399aa363ce031392c3d4#egg=MySQL-python',
+    ]
 setup(
     name=NAME,
     version=VERSION,
@@ -51,7 +58,7 @@ setup(
     install_package_data=True,
     zip_safe=False,
     entry_points=ENTRY_POINTS,
-    install_requires=INSTALL_REQUIRES,
+    install_requires=install_requires,
     tests_require=TESTS_REQUIRE,
     test_suite=TEST_SUITE,
 )
